@@ -19,4 +19,12 @@ export default createGlobalStyle`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body {
+  background: #F2F2F2;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  :-webkit-scrollbar {
+    display: none;
+  }
+}
 `;
