@@ -10,6 +10,9 @@ export const Container = styled.div`
   width: 100%;
   color: #bfbebf;
   background: #fff;
+  a {
+    text-decoration: none;
+  }
 `;
 export const Item = styled.div`
   display: flex;
