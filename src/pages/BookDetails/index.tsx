@@ -19,7 +19,7 @@ function BookDetails() {
       </ContainerTop>
       <BookDescription>
         <h4>
-          <b>Title: </b>Subtitle bla bla bla
+          <b>Title: </b>Subtitle
         </h4>
         <span>Author name</span>
         <p>

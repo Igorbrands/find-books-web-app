@@ -8,6 +8,17 @@ export const Container = styled.div`
   align-items: flex-start;
 
   padding: 50px 20px;
+  button {
+    all: unset;
+    border-radius: 8px;
+    padding: 12px;
+    color: #fff;
+    background: #ff6978;
+    transform: all 0.2s;
+    :hover {
+      opacity: 0.9;
+    }
+  }
 `;
 
 export const SearchBar = styled.div`

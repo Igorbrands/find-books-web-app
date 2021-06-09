@@ -26,5 +26,8 @@ body {
   :-webkit-scrollbar {
     display: none;
   }
+  button {
+    cursor: pointer;
+  }
 }
 `;
