@@ -1,13 +1,13 @@
 import { Route, Switch } from 'react-router-dom';
 import Home from '../pages/Home';
-import Book from '../pages/Book';
+import BookDetails from '../pages/BookDetails';
 import Search from '../pages/Search';
 
 const Routes = () => (
   <Switch>
     <Route path="/" component={Home} exact />
-    <Route path="/book" component={Book} />
-    <Route path="/search" component={Search} />
+    <Route path="/book/:id" component={BookDetails} />
+    <Route path="/search/:param" component={Search} />
   </Switch>
 );
 
