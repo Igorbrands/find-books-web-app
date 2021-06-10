@@ -5,9 +5,10 @@ import Book from '../../components/Book';
 import api from '../../services/api';
 import { BookProps } from '../../types/book';
 import { Container, SearchBar } from './styles';
+import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 
 function Search() {
-  const [books, setBooks] = useState<BookProps[]>([]);
+  const [books, setBooks] = useState<BookProps[] | null>([]);
 
   const { param }: { param: string } = useParams();
   const history = useHistory();
@@ -19,14 +20,14 @@ function Search() {
         setBooks(response.data.items);
       })
       .catch((error) => {
-        <h2>Algo deu errado...</h2>;
+        setBooks(null);
       });
   }, [param]);
   console.log(param);
 
   function handleSearch() {}
   function setBookDetails() {
-    history.push(`/book/:id}`);
+    history.push(`/book/:id`);
   }
 
   function showMore() {
@@ -39,12 +40,12 @@ function Search() {
         <section>
           <SearchBar>
             <button type="button">
-              <Search />
+              <SearchIcon />
             </button>
             <input type="text" onClick={handleSearch} />
           </SearchBar>
         </section>
-        {books.map((book, index) => (
+        {books?.map((book, index) => (
           <Book
             key={index}
             image={book.volumeInfo.imageLinks?.thumbnail}

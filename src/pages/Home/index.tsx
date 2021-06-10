@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ReactComponent as Hand } from '../../assets/hand.svg';
-import { ReactComponent as Search } from '../../assets/search.svg';
+import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 
 import images from '../../assets';
 import {
@@ -36,7 +36,7 @@ function Home() {
                 handleSearch();
               }}
             >
-              <Search />
+              <SearchIcon />
             </button>
             <input
               type="text"

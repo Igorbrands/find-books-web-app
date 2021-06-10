@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export default createGlobalStyle`
 @font-face {
   font-family: 'SFProDisplay';
-  src: local('SFProDisplay'), url(./fonts/SFProDisplay.ttf) format('truetype');
+  src: local('SFProDisplay'), url(../fonts/SFProDisplay.ttf) format('truetype');
 }
 
 #root {
