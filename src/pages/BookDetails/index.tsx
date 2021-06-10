@@ -5,15 +5,17 @@ import { ReactComponent as Listen } from '../../assets/headphones.svg';
 import { ReactComponent as Share } from '../../assets/share.svg';
 
 import { Container, ContainerTop, BookDescription, NavMenu } from './styles';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function BookDetails() {
+  const history = useHistory();
+
   return (
     <Container>
       <ContainerTop>
-        <Link to="/">
+        <button onClick={() => history.goBack()}>
           <Back style={{ position: 'relative', top: '55px', left: '33px' }} />
-        </Link>
+        </button>
         <DetailsBackground />
         imgem do livro
       </ContainerTop>

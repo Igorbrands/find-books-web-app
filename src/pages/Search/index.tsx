@@ -4,7 +4,7 @@ import BottomNavigation from '../../components/BottomNavigation';
 import Book from '../../components/Book';
 import api from '../../services/api';
 import { BookProps } from '../../types/book';
-import { Container } from './styles';
+import { Container, SearchBar } from './styles';
 
 function Search() {
   const [books, setBooks] = useState<BookProps[]>([]);
@@ -37,7 +37,12 @@ function Search() {
     <>
       <Container>
         <section>
-          <input type="text" onClick={handleSearch} />
+          <SearchBar>
+            <button type="button">
+              <Search />
+            </button>
+            <input type="text" onClick={handleSearch} />
+          </SearchBar>
         </section>
         {books.map((book, index) => (
           <Book

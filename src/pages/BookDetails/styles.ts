@@ -20,6 +20,9 @@ export const BookDescription = styled.div`
     letter-spacing: 0.2px;
     color: rgba(49, 49, 49, 0.6);
   }
+  button {
+    all: unset;
+  }
 `;
 export const NavMenu = styled.ul`
   display: flex;
