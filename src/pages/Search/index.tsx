@@ -1,60 +1,65 @@
 import { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import BottomNavigation from '../../components/BottomNavigation';
 import Book from '../../components/Book';
 import api from '../../services/api';
 import { BookProps } from '../../types/book';
-import { Container, SearchBar } from './styles';
+import {
+  Container,
+  SearchBar,
+  Content,
+  LoadMore,
+  Error,
+} from './styles';
 import { ReactComponent as SearchIcon } from '../../assets/search.svg';
 
 function Search() {
   const [books, setBooks] = useState<BookProps[] | null>([]);
+  const [inputError, setInputError] = useState(false);
+  const [maxResults, setMaxResults] = useState(10);
 
   const { param }: { param: string } = useParams();
-  const history = useHistory();
 
   useEffect(() => {
-    api
-      .get(`${param}`)
-      .then((response) => {
+    try {
+      api.get(`?q=${param}&maxResults=${maxResults}`).then((response) => {
         setBooks(response.data.items);
-      })
-      .catch((error) => {
-        setBooks(null);
+        return;
       });
-  }, [param]);
-  console.log(param);
-
-  function handleSearch() {}
-  function setBookDetails() {
-    history.push(`/book/:id`);
-  }
+    } catch (error) {
+      setBooks(null);
+      setInputError(true);
+    }
+  }, [param, maxResults]);
 
   function showMore() {
-    api.get('&maxResults=20');
+    setMaxResults(maxResults + 10);
   }
 
   return (
     <>
       <Container>
-        <section>
-          <SearchBar>
-            <button type="button">
-              <SearchIcon />
-            </button>
-            <input type="text" onClick={handleSearch} />
-          </SearchBar>
-        </section>
-        {books?.map((book, index) => (
-          <Book
-            key={index}
-            image={book.volumeInfo.imageLinks?.thumbnail}
-            title={book.volumeInfo.title}
-            authors={book.volumeInfo.authors}
-            handleBook={setBookDetails}
-          />
-        ))}
-        <button onClick={showMore}>Load More</button>
+        <SearchBar>
+          <button type="button" onClick={() => {}}>
+            <SearchIcon />
+          </button>
+          <input type="text" />
+        </SearchBar>
+        <Content>
+          {(inputError || !books) && <Error>Something went wrong...</Error>}
+          {books?.map((book) => (
+            <Link key={book.id} to={`/book/${book.id}`}>
+              <Book
+                image={book.volumeInfo.imageLinks?.thumbnail}
+                title={book.volumeInfo.title}
+                authors={book.volumeInfo.authors}
+              />
+            </Link>
+          ))}
+        </Content>
+        <LoadMore>
+          <button onClick={showMore}>Load More</button>
+        </LoadMore>
       </Container>
       <BottomNavigation />
     </>
