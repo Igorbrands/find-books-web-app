@@ -40,13 +40,14 @@ export const SectionHeader = styled.div`
 export const Banner = styled.div`
   display: inline-flex;
   img {
+    cursor: pointer;
     :first-child {
       margin-right: 4px;
     }
   }
 `;
 
-export const SearchBar = styled.div`
+export const SearchBar = styled.form`
   position: relative;
   display: flex;
   flex-direction: row;
@@ -57,6 +58,7 @@ export const SearchBar = styled.div`
     position: absolute;
     left: 15px;
     top: 16px;
+    cursor: pointer;
   }
   input {
     border: none;
