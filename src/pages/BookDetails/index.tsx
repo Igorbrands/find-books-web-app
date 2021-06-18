@@ -1,36 +1,71 @@
+import { useEffect, useState } from 'react';
 import { ReactComponent as DetailsBackground } from '../../assets/details-bg.svg';
 import { ReactComponent as Back } from '../../assets/back.svg';
 import { ReactComponent as Read } from '../../assets/book-open.svg';
 import { ReactComponent as Listen } from '../../assets/headphones.svg';
 import { ReactComponent as Share } from '../../assets/share.svg';
+import {
+  Container,
+  ContainerTop,
+  BookDescription,
+  NavMenu,
+  BookImage,
+} from './styles';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import api from '../../services/api';
+import { removeTags } from '../../utils';
+interface BookParams {
+  book: string;
+}
 
-import { Container, ContainerTop, BookDescription, NavMenu } from './styles';
-import { useHistory } from 'react-router-dom';
+interface DetailsProps {
+  id: string;
+  volumeInfo: {
+    title: string;
+    subtitle: string;
+    authors: string;
+    description: string;
+    imageLinks: {
+      thumbnail: string;
+    };
+  };
+}
 
 function BookDetails() {
   const history = useHistory();
+  const { params } = useRouteMatch<BookParams>();
+  const [bookDetails, setBookDetails] = useState<DetailsProps>();
+
+  const description = removeTags(bookDetails?.volumeInfo.description);
+
+  useEffect(() => {
+    api
+      .get(`/${params.book}`)
+      .then((res) => {
+        setBookDetails(res.data);
+      })
+      .catch((error) => {
+      });
+  }, [params.book]);
 
   return (
     <Container>
       <ContainerTop>
-        <button onClick={() => history.goBack()}>
-          <Back style={{ position: 'relative', top: '55px', left: '33px' }} />
-        </button>
         <DetailsBackground />
-        imgem do livro
+        <Back
+          onClick={() => history.goBack()}
+          style={{ top: '55px', left: '33px' }}
+        />
+        <BookImage src={bookDetails?.volumeInfo.imageLinks.thumbnail} />
       </ContainerTop>
       <BookDescription>
-        <h4>
-          <b>Title: </b>Subtitle
-        </h4>
-        <span>Author name</span>
-        <p>
-          How do successful companies create products people can’t put down? Why
-          do some products capture widespread attention while others flop?Why do
-          some products capture widespread attention while others flop?Why do
-          some products capture widespread attention while others flop?
-        </p>
+        <b>{bookDetails?.volumeInfo.title}: </b>
+        {bookDetails?.volumeInfo.subtitle}
+        <br />
+        <span>{bookDetails?.volumeInfo.authors}</span>
+        <p>{description}</p>
       </BookDescription>
+
       <NavMenu>
         <li>
           <Read />

@@ -4,10 +4,9 @@ interface BookListProps {
   image?: string;
   title: string;
   authors: string[];
-  handleBook: () => void;
 }
 
-function Book({ image, title, authors, handleBook }: BookListProps) {
+function Book({ image, title, authors }: BookListProps) {
   let authorDisplay = '';
   if (authors?.length) {
     authorDisplay = authors?.join('; ');
@@ -15,7 +14,7 @@ function Book({ image, title, authors, handleBook }: BookListProps) {
 
   return (
     <>
-      <Container onClick={handleBook}>
+      <Container>
         {image && <img src={image} alt={title} />}
         <div>
           <Title>{title}</Title>

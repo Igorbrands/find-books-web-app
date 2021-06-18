@@ -1,27 +1,44 @@
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 
-export const Container = styled.div``;
-export const ContainerTop = styled.div``;
+export const Container = styled.div`
+  overflow-x: hidden;
+  button {
+    all: unset;
+  }
+`;
+export const ContainerTop = styled.div`
+  > svg {
+    position: absolute;
+  }
+`;
+export const BookImage = styled.img`
+  border-radius: 10px;
+  position: relative;
+  margin-top: 132px;
+  margin-left: 112px;
+`;
+
 export const BookDescription = styled.div`
   padding: 36px 20px;
   color: #36383a;
 
+  text-align: left;
+  white-space: pre-wrap;
   font-size: 24px;
   font-weight: 400;
   span {
     font-size: 16px;
     line-height: 19px;
     color: #ff6978;
-    margin-bottom: 10px;
+    font-weight: bold;
   }
   p {
     font-size: 14px;
     line-height: 25px;
     letter-spacing: 0.2px;
+    margin-top: 10px;
+
     color: rgba(49, 49, 49, 0.6);
-  }
-  button {
-    all: unset;
   }
 `;
 export const NavMenu = styled.ul`
