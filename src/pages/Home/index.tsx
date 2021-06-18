@@ -46,7 +46,7 @@ function Home() {
         </section>
         <section>
           <WelcomeTitle>
-            Hi, <span>Mehmed Al Fatih</span> <Hand />
+            Hi, <span>Noia!</span> <Hand />
           </WelcomeTitle>
         </section>
         <section>
